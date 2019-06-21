@@ -163,8 +163,8 @@ class Client
                 self::API_BASEURL . '/customtag/',
                 ['query' => $query_params]
             );
-        } catch (\Exception $e) {
-            // quietly catch request errors (such as 401 Unauthorized)
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            $response = $e->getResponse();
         }
         return $response;
     }
@@ -186,8 +186,8 @@ class Client
                 self::API_BASEURL . '/list/',
                 ['query' => $query_params]
             );
-        } catch (\Exception $e) {
-            // quietly catch request errors (such as 401 Unauthorized)
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            $response = $e->getResponse();
         }
         return $response;
     }
@@ -214,9 +214,8 @@ class Client
                     'json'  => $data,
                 ]
             );
-        } catch (\Exception $e) {
-            // quietly catch request errors (such as 401 Unauthorized)
-            echo 'Error: ' . $e->getMessage();
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            $response = $e->getResponse();
         }
         return $response;
     }
